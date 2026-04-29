@@ -6,11 +6,12 @@ import java.net.InetSocketAddress;
 
 public class HelloWorld { // Matches your filename exactly
     public static void main(String[] args) throws Exception {
-        // Bind to port 8080
+        // Bind to port 8081
         HttpServer server = HttpServer.create(new InetSocketAddress(8081), 0);
 
         server.createContext("/", (exchange) -> {
-            String response = "<h1>Success!</h1><p>Java Web Server is live on GCP VM.</p>";
+            String vmName = System.getProperty("server.name", "Unknown VM");
+            String response = "<h1>Success!</h1><p>Java Web Server is live on <b>" + vmName + "</b>.</p>";
 
             // Explicitly define as long to satisfy the method signature
             long responseLength = response.getBytes().length;
